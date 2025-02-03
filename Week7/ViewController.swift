@@ -28,6 +28,36 @@ class ViewController: UIViewController {
         
         // View
         configureView()
+        
+        // Completion Handler 통합 연습
+        NetworkManager.shared.getLotto2 { lotto, error in
+            
+            //1. 둘 다 조건을 만족해야 하는데 돌아오는 값의 한 쪽은 어쨌든 nil일 테니 결국 return 될 듯
+            // => early exit 이 되어버린다! 성공케이스가 존재하지 않음
+            guard let lotto1 = lotto,
+                  let error1 = error else {
+                return
+            }
+            
+            //2. 먼저 쓰인 가드문에서 return 되면 나중 가드문인 error 는 안타게 된다
+            guard let lotto2 = lotto else {
+                return
+            }
+            guard let error2 = error else {
+                return
+            }
+            // => Optional 지정 자체는 나쁘지 않은데 guard 문으로 해결 할 때 이런 부분을 잘 고려해주어야 한다
+        }
+        
+        NetworkManager.shared.getLotto3 { response in
+            switch response {
+            case .success(let success):
+                print(success)
+            case .failure(let error):
+                print(error)
+            }
+        }
+        
     }
     
     func configureView() {
