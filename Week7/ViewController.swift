@@ -12,7 +12,8 @@ import MapKit
 
 class ViewController: UIViewController {
     
-    //1. 위치 매니저 생성: 위치에 관련된 대부분을 담당 -> 대부분의 프레임워크에 이런 식으로 매니저가 마련되어 있다. 프로토콜과 함께 동작한다.
+    //1. 위치 매니저 생성: 위치에 관련된 대부분을 담당
+    // -> 대부분의 프레임워크에 이런 식으로 매니저가 마련되어 있다. 프로토콜과 함께 동작한다.
     lazy var locationManager = CLLocationManager()
     
     let locationButton = UIButton()
@@ -24,7 +25,7 @@ class ViewController: UIViewController {
         
         //3. 위치 프로토콜 연결
         locationManager.delegate = self
-        checkDeviceLocation()
+        // checkDeviceLocation()
         
         // View
         configureView()
